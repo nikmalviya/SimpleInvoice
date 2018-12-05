@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="rootNode" prefHeight="718.0" prefWidth="1141.0" styleClass="anchor-pane" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simpleinvoice.controller.ProductsController">
+    <!--<stylesheets>
+        <URL value="@courseview.css" />
+    </stylesheets>-->
+   <children>
+      <Label layoutX="62.0" layoutY="50.0" prefHeight="51.0" prefWidth="227.0" styleClass="heading" text="Products" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="494.0" prefWidth="834.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <BorderPane layoutX="220.0" layoutY="140.0" prefHeight="479.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <bottom>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="944.0" spacing="20.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton fx:id="addProductButton" layoutX="839.0" layoutY="28.0" text="Add Product" />
+                        <JFXButton fx:id="updateButton" layoutX="802.0" layoutY="31.0" text="Update" />
+                        <JFXButton fx:id="deleteButton" layoutX="720.0" layoutY="31.0" text="Delete" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets right="20.0" />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </HBox>
+               </bottom>
+               <top>
+                  <BorderPane prefHeight="60.0" prefWidth="944.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <AnchorPane fx:id="apCombobox" BorderPane.alignment="CENTER" />
+                     </center>
+                     <top>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="944.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="searchTextField" prefHeight="31.0" prefWidth="608.0" promptText="Search" />
+                              <JFXButton fx:id="refreshButton" contentDisplay="GRAPHIC_ONLY" styleClass="refreshButton" text="  ">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/refresh.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></JFXButton>
+                           </children>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+               </top>
+               <center>
+                  <TableView fx:id="productTableView" editable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: none; -fx-border-color: none;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+                     <columns>
+                        <TableColumn fx:id="productIDColumn" minWidth="50.0" prefWidth="50.0" text="Product ID" />
+                        <TableColumn fx:id="productNameColumn" minWidth="250.0" prefWidth="250.0" text="Product Name" />
+                        <TableColumn fx:id="qtyColoumn" minWidth="40.0" prefWidth="40.0" text="Quantity" />
+                        <TableColumn fx:id="priceColoumn" minWidth="100.0" prefWidth="100.0" text="Price" />
+                        <TableColumn fx:id="gstColoumn" minWidth="70.0" prefWidth="70.0" text="GST Rate(%)" />
+                        <TableColumn fx:id="hsnColoumn" minWidth="168.0" prefWidth="168.0" text="HSN No." />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

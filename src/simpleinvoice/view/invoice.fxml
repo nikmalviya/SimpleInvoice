@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simpleinvoice.controller.InvoiceController">
    <children>
       <BorderPane prefHeight="597.0" prefWidth="865.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <top>
             <AnchorPane prefHeight="167.0" prefWidth="845.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" layoutX="348.0" layoutY="14.0" prefHeight="21.0" prefWidth="150.0" text="TAX INVOICE">
+                  <Label alignment="CENTER" layoutX="391.0" layoutY="14.0" prefHeight="21.0" prefWidth="150.0" text="TAX INVOICE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -30,7 +30,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutX="601.0" layoutY="89.0" />
+                  <DatePicker fx:id="dpInvoiceDate" layoutX="601.0" layoutY="89.0" />
                   <Label layoutX="466.0" layoutY="54.0" text="Invoice No. :">
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -56,7 +56,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="202.0" layoutY="49.0" />
+                  <TextField fx:id="tfCustName" layoutX="202.0" layoutY="49.0" />
                   <Button layoutX="384.0" layoutY="47.0" mnemonicParsing="false" text="+" />
                </children>
                <BorderPane.margin>
@@ -70,7 +70,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </BorderPane.margin>
                <children>
-                  <VBox layoutX="34.0" layoutY="14.0" spacing="5.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
+                  <VBox layoutX="34.0" layoutY="14.0" spacing="5.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <HBox spacing="50.0">
                            <children>
@@ -97,66 +97,64 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                                  <padding>
-                                    <Insets left="8.0" />
+                                    <Insets left="-2.0" />
                                  </padding></Label>
                            </children>
                         </HBox>
                         <HBox spacing="50.0">
                            <children>
-                              <TextField prefHeight="26.0" prefWidth="268.0" />
+                              <TextField fx:id="tfProduct" prefHeight="26.0" prefWidth="268.0" />
                               <Button mnemonicParsing="false" text="+">
                                  <HBox.margin>
                                     <Insets left="-40.0" />
                                  </HBox.margin>
                               </Button>
-                              <TextField prefHeight="26.0" prefWidth="80.0" />
-                              <TextField prefHeight="26.0" prefWidth="80.0" />
-                              <TextField prefHeight="26.0" prefWidth="80.0" />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Add" />
+                              <TextField fx:id="tfRate" prefHeight="26.0" prefWidth="80.0" />
+                              <TextField fx:id="tfQty" prefHeight="26.0" prefWidth="80.0" />
+                              <TextField fx:id="tfAmt" prefHeight="26.0" prefWidth="80.0" />
+                              <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Add" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <TableView layoutX="50.0" layoutY="71.0" prefHeight="200.0" prefWidth="758.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                  <TableView fx:id="tblvProducts" layoutX="50.0" layoutY="71.0" prefHeight="200.0" prefWidth="758.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                     <columns>
-                        <TableColumn prefWidth="63.0" text="Sr. No" />
-                      <TableColumn prefWidth="251.0" text="Product Description" />
-                        <TableColumn prefWidth="99.0" text="HSN No." />
-                        <TableColumn prefWidth="82.0" text="GST Rate" />
-                        <TableColumn prefWidth="82.0" text="Qty" />
-                        <TableColumn prefWidth="84.0" text="Rate" />
-                        <TableColumn prefWidth="133.0" text="Gross Amount" />
+                        <TableColumn fx:id="tblcSrNo" prefWidth="59.0" text="SNo." />
+                      <TableColumn fx:id="tblcProductDes" prefWidth="239.0" text="Product Description" />
+                        <TableColumn fx:id="tblcHsnNo" prefWidth="85.0" text="HSN No." />
+                        <TableColumn fx:id="tblcGstRate" prefWidth="59.0" text="GST" />
+                        <TableColumn fx:id="tblcQuantity" minWidth="6.0" prefWidth="61.0" text="Qty" />
+                        <TableColumn fx:id="tblcRate" prefWidth="98.0" text="Rate" />
+                        <TableColumn fx:id="tblcCgstRate" prefWidth="82.0" text="CGST(%) " />
+                        <TableColumn fx:id="tblcSgstRate" prefWidth="76.0" text="SGST(%)" />
+                        <TableColumn fx:id="tblcAmount" prefWidth="169.0" text="Amount" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
          </center>
          <bottom>
-            <AnchorPane prefHeight="189.0" prefWidth="839.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="188.0" prefWidth="980.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER_RIGHT" layoutX="445.0" layoutY="14.0" prefHeight="160.0" prefWidth="144.0" spacing="20.0" AnchorPane.topAnchor="7.0">
+                  <VBox alignment="CENTER_RIGHT" layoutX="571.0" prefHeight="160.0" prefWidth="144.0" spacing="20.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Sub Total (₹) :" />
                         <Label text="Discount (If Any ₹) :" />
-                        <Label text="CGST(%) :" />
-                        <Label text="SGST(%) :" />
                         <Label text="Net Amount(₹) :" />
                      </children>
                   </VBox>
-                  <VBox layoutX="603.0" layoutY="9.0" spacing="10.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+                  <VBox layoutX="603.0" layoutY="9.0" spacing="10.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="30.0">
                      <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
+                        <TextField fx:id="tfSubTotal" />
+                        <TextField fx:id="tfDiscount" />
+                        <TextField fx:id="tfNetAmount" />
                      </children>
                   </VBox>
-                  <Button layoutX="29.0" layoutY="14.0" mnemonicParsing="false" text="Edit" />
-                  <Button layoutX="91.0" layoutY="14.0" mnemonicParsing="false" text="Remove" />
-                  <Button layoutX="219.0" layoutY="141.0" mnemonicParsing="false" text="Save" />
-                  <Button layoutX="292.0" layoutY="141.0" mnemonicParsing="false" text="Cancel" />
-                  <CheckBox layoutX="91.0" layoutY="145.0" mnemonicParsing="false" text="Print On Save" />
+                  <Button fx:id="btnEdit" layoutX="29.0" layoutY="14.0" mnemonicParsing="false" text="Edit" />
+                  <Button fx:id="btnRemove" layoutX="91.0" layoutY="14.0" mnemonicParsing="false" text="Remove" />
+                  <Button fx:id="btnSave" layoutX="435.0" layoutY="128.0" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="btnCancel" layoutX="508.0" layoutY="128.0" mnemonicParsing="false" text="Cancel" />
+                  <CheckBox fx:id="cbPrintOnSave" layoutX="307.0" layoutY="132.0" mnemonicParsing="false" text="Print On Save" />
                </children>
             </AnchorPane>
          </bottom>

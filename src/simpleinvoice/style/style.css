@@ -1,0 +1,201 @@
+*{
+    -fx-primary:#501787;
+    -fx-secondary:#8145b8;
+    -fx-dark:#1d0059;
+}
+
+.heading{
+    -fx-font-family:'ShureTechMono Nerd Font';
+    -fx-font-size:32px;
+    -fx-text-fill:-fx-primary;
+}
+.jfx-button{
+    -fx-font-family: 'ShureTechMono Nerd Font';
+    -fx-font-size:15px;
+    -fx-background-color:white;
+    -fx-background-radius:20px;
+    -fx-border-style:solid;
+    -fx-border-radius:20px;
+    -fx-border-color:#1d0059;
+    -fx-border-width:1px;
+}
+.jfx-button:hover{
+    -fx-background-color:#501787;
+    -fx-text-fill:white;
+}
+.refreshButton:hover{
+    -fx-background-color:white;
+    -fx-text-fill:#501787;
+}
+#searchTextField{
+    -fx-border-width: 0.7px;
+    -fx-border-color: #D7D7D7;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-text-fill: black;
+    -fx-font-size: 15px; 
+    -fx-padding: 5px 35px 5px 15px;
+    -fx-background-color: white;
+}
+#searchTextField:focused{
+    -fx-border-color: #501787;
+
+}
+.combo-box{
+    -fx-border-width: 0.5px;
+    -fx-border-color: #501787;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-background-color: white;
+    -fx-font-size: 15px; 
+    -fx-padding: 0px;
+    -fx-font-weight:700;
+    -fx-font-family: 'ShureTechMono Nerd Font';
+}
+.combo-box:hover .list-cell{
+    -fx-text-fill: white;
+}
+.combo-box:focused .list-cell{
+    -fx-text-fill: white;
+}
+.combo-box-base:hover .arrow,.combo-box-base:focused .arrow{
+    -fx-background-color:white;
+}
+.combo-box-base:hover{
+    -fx-background-color: #8145b8;
+    -fx-text-fill: white;
+}
+.combo-box-base:focused{
+    -fx-background-color: #501787;
+    -fx-text-fill: white;
+}
+.combo-box .list-view{
+    -fx-border-width: 0.5px;
+    -fx-border-color: #501787;
+    -fx-background-color: white;
+    -fx-padding: 0px;
+    -fx-font-weight:700;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+.combo-box .list-view .list-cell{
+    -fx-background-radius: 10px;
+}
+.combo-box .list-view .list-cell:filled {
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+.combo-box .list-view .list-cell:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #8145b8;
+}
+.combo-box .list-view .list-cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: #501787;
+}
+
+AnchorPane{
+    -fx-background-color:whitesmoke;
+}
+.table-cell {
+    -fx-padding: 0.8em 0.3em 0.5em 0.3em;
+    -fx-border-color: transparent -fx-box-border transparent transparent;
+    -fx-font: 15px 'ShureTechMono Nerd Font';
+    -fx-alignment: center;
+    -fx-font-weight: 500;
+    -fx-text-fill: #212121;
+}
+#examTableView .table-cell{
+    -fx-padding: 0.4em 0.3em 0.3em 0.3em;
+}
+#subjectsTableView .table-cell{
+    -fx-padding: 0.2em 0.2em 0.2em 0.2em;
+}
+.table-view {
+    -fx-table-header-border-color: #959595;
+    -fx-table-cell-border-color: -fx-box-border;
+}
+.table-view:focused {
+    -fx-background-color: -fx-box-border,-fx-box-border, white;
+}
+.table-row-cell {
+    -fx-background-color: white;
+}
+.table-row-cell:odd {
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+.table-view:focused .table-row-cell:focused,.table-view:focused .table-row-cell:focused:odd {
+    -fx-background-color: -fx-box-border, white;
+    -fx-background-insets: 0, 1, 2;
+}
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: #501787;
+}
+.table-view:focused .table-row-cell:filled:selected, .table-view:row-selection .table-row-cell:filled:hover:selected {
+    -fx-background-color: #501787;
+    -fx-background-insets: 0,1 1 1 1,0;
+}
+.table-view:focused .table-row-cell:filled:focused:selected:hover {
+    -fx-background-color: #1d0059;
+    -fx-background-insets: 0,1 1 1 1,0;
+}
+.table-row-cell:filled:selected:focused, .table-row-cell:filled:selected {
+    -fx-background-color: #501787;
+}
+.table-view:row-selection .table-row-cell:filled:hover {
+    -fx-background-color: -fx-box-border,#8145b8;
+    
+}
+.table-view:row-selection .table-row-cell:filled:hover .text{
+    -fx-fill:white;
+}
+.table-view:row-selection .table-row-cell:filled:focused:hover {
+    -fx-background-color: #501787;
+}
+.table-view:focused .table-row-cell:filled:focused:hover {
+    -fx-background-color: #501787;
+}
+.table-view .column-header-background {
+    -fx-background-color: white;
+}
+
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: white;
+    -fx-size: 35;
+    -fx-border-color: -fx-box-border;
+    -fx-border-insets: -1 0 0 -1;
+    -fx-padding: 0 5 0 0;
+}
+.table-view .show-hide-columns-button {
+    -fx-background-color: white;
+    -fx-border-color: -fx-box-border;
+    -fx-border-insets: -1 -1 0 0;
+}
+.table-view .column-drag-header {
+    -fx-background-color: #501787;
+    -fx-opacity: 0.6;
+}
+.table-row-cell:selected .text {
+       -fx-fill: white ;
+}
+.table-row-cell:hover .text{
+    -fx-fill: black;
+}
+.table-row-cell:focused:hover .text{
+    -fx-fill: white;
+}
+.table-view .column-resize-line {
+    -fx-background-color: rgb(45,137,239);
+}
+.table-view .column-overlay {
+    -fx-background-color: darkgray;
+    -fx-opacity: 0.2;
+}
+.text-field:focused {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+.text:focused:hover{
+     -fx-fill: white;
+}

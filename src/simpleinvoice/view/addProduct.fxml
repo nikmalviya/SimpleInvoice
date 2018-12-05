@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simpleinvoice.controller.AddProductController">
+   <children>
+      <AnchorPane layoutX="24.0" layoutY="32.0" prefHeight="70.0" prefWidth="200.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="titleLabel" alignment="CENTER" text="Add Product" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+         </children>
+      </AnchorPane>
+      <VBox layoutY="70.0" prefHeight="299.0" prefWidth="490.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <JFXTextArea fx:id="tfProductName" focusColor="#501787" labelFloat="true" promptText="Product Description">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="13.0" />
+               </VBox.margin>
+            </JFXTextArea>
+            <JFXTextField fx:id="tfQty" focusColor="#501787" labelFloat="true" layoutX="30.0" layoutY="20.0" promptText="Quantity">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="tfPrice" focusColor="#501787" labelFloat="true" layoutX="10.0" layoutY="60.0" promptText="Price">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="tfGST" focusColor="#501787" labelFloat="true" layoutX="10.0" layoutY="90.0" promptText="GST Rate (%)">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="tfHSN" focusColor="#501787" labelFloat="true" layoutX="10.0" layoutY="120.0" promptText="HSN No.">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
+         </children>
+      </VBox>
+      <JFXButton fx:id="btnCancel" layoutX="275.0" layoutY="382.0" prefHeight="34.0" prefWidth="163.0" text="Cancel" AnchorPane.rightAnchor="50.0" />
+      <JFXButton fx:id="btnAddProduct" layoutX="50.0" layoutY="382.0" prefHeight="34.0" prefWidth="163.0" text="Add Product" AnchorPane.leftAnchor="50.0" />
+   </children>
+   <stylesheets>
+      <URL value="@../style/addProduct.css" />
+   </stylesheets>
+</AnchorPane>

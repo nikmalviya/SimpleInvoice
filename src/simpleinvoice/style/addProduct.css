@@ -1,0 +1,37 @@
+AnchorPane{
+    -fx-background-color: white;
+}
+.jfx-text-field{
+    -fx-font-size:17px;
+    -fx-font-family:'ShureTechMono Nerd Font';
+}
+.jfx-text-area{
+    -fx-font-size:17px;
+    -fx-font-family:'ShureTechMono Nerd Font';
+}
+.header {
+    -fx-background-color: #501787;
+}
+.header .label{
+    -fx-text-fill:white;
+    -fx-font-size:24px;
+    -fx-font-family:'ShureTechMono Nerd Font';
+}
+.jfx-button:hover{
+    -fx-background-color:#501787;
+    -fx-text-fill:white;
+}
+.jfx-button{
+    -fx-font-family: 'ShureTechMono Nerd Font';
+    -fx-font-size:17px;
+    -fx-background-color:white;
+    -fx-background-radius:20px;
+    -fx-border-style:solid;
+    -fx-border-radius:20px;
+    -fx-border-color:#501787;
+    -fx-border-width:1px;
+}
+.label{
+    -fx-font-family: 'ShureTechMono Nerd Font';
+    -fx-font-size:17px;
+}

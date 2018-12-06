@@ -19,7 +19,7 @@ public class ProductRepository {
     private static final ObservableList<String> PRODUCT_NAME_LIST = FXCollections.observableArrayList();
     private static ProductRepository productsrepo;
 
-    public ObservableList getProducts() {
+    public ObservableList<Product> getProducts() {
         return PRODUCTS;
     }
 

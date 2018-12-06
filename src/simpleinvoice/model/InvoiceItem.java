@@ -1,5 +1,7 @@
 package simpleinvoice.model;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleFloatProperty;
@@ -8,19 +10,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class InvoiceItem {
-    private IntegerProperty srno;
+    private final IntegerProperty srno;
     private final StringProperty productName;
-    private IntegerProperty hsnNumber;
-    private FloatProperty gst;
-    private FloatProperty rate;
-    private IntegerProperty quantity;
-    private FloatProperty cgst;
-    private FloatProperty sgstPercent;
-    private FloatProperty cgstPercent;
-    private FloatProperty sgst;
-    private FloatProperty amount;
-    private StringProperty cgstWithamount;
-    private StringProperty sgstWithamount;
+    private final IntegerProperty hsnNumber;
+    private final FloatProperty gst;
+    private final FloatProperty rate;
+    private final IntegerProperty quantity;
+    private final FloatProperty cgst;
+    private final FloatProperty sgstPercent;
+    private final FloatProperty cgstPercent;
+    private final FloatProperty sgst;
+    private final FloatProperty amount;
+    private final StringProperty cgstWithamount;
+    private final StringProperty sgstWithamount;
+    private final NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("en","IN"));
 
     public InvoiceItem(Product product,Integer srno,Integer quantity) {
         this.srno = new SimpleIntegerProperty(srno);
@@ -35,8 +38,8 @@ public class InvoiceItem {
         this.cgst = new SimpleFloatProperty((cgstPercent.get()*price)/100);
         this.sgst = new SimpleFloatProperty((sgstPercent.get()*price)/100);
         this.amount = new SimpleFloatProperty(price+cgst.get()+sgst.get());
-        this.cgstWithamount = new SimpleStringProperty(String.valueOf(cgst.get())+"\n"+cgstPercent.get()+"%");
-        this.sgstWithamount = new SimpleStringProperty(String.valueOf(sgst.get())+"\n"+sgstPercent+"%");
+        this.cgstWithamount = new SimpleStringProperty(format.format(cgst.get())+"\n   ("+cgstPercent.get()+"%)");
+        this.sgstWithamount = new SimpleStringProperty(format.format(sgst.get())+"\n   ("+sgstPercent.get()+"%)");
     }
 
     public String getCgstWithamount() {
@@ -74,7 +77,9 @@ public class InvoiceItem {
     public Float getGst() {
         return gst.get();
     }
-
+    public String getGstString(){
+        return gst.get()+"%";
+    }
     public void setGst(Float gst) {
         this.gst.set(gst);
     }
@@ -106,6 +111,9 @@ public class InvoiceItem {
     public Float getAmount() {
         return amount.get();
     }
+    public String getFormattedAmount() {
+        return format.format(amount.get());
+    }
 
     public void setAmount(Float amount) {
         this.amount.set(amount);
@@ -113,6 +121,10 @@ public class InvoiceItem {
 
     public Float getRate() {
         return rate.get();
+    }
+    
+    public String getFormattedRate() {
+        return format.format(rate.get());
     }
 
     public void setRate(Float rate) {

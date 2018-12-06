@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/style/addProduct.css</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/model/Product.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/Main.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/ViewProductController.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/repository/ProductRepository.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/view/addProduct.fxml</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/AddProductController.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/ProductsController.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/InvoiceController.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/view/viewProduct.fxml</file>
+        </group>
     </open-files>
 </project-private>

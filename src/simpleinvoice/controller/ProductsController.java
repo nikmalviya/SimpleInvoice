@@ -62,8 +62,6 @@ public class ProductsController implements Initializable {
     @FXML
     private TableColumn<Product,Integer> qtyColoumn;
     @FXML
-    private TableColumn<Product,Float> priceColoumn;
-    @FXML
     private TableColumn<Product,Float> gstColoumn;
     @FXML
     private TableColumn<Product,Integer> hsnColoumn;
@@ -167,8 +165,7 @@ public class ProductsController implements Initializable {
     private void initTableCellValueFactory() {
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        qtyColoumn.setCellValueFactory(new PropertyValueFactory<>("qtyAvailable"));
-        priceColoumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        qtyColoumn.setCellValueFactory(new PropertyValueFactory<>("qtyAvailable"));        
         gstColoumn.setCellValueFactory(new PropertyValueFactory<>("gstRate"));
         hsnColoumn.setCellValueFactory(new PropertyValueFactory<>("hsnNumber"));
         

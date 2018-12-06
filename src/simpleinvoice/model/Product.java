@@ -12,7 +12,6 @@ public class Product {
 
     private final StringProperty name;
     private final IntegerProperty qtyAvailable;
-    private final FloatProperty price;
     private final FloatProperty gstRate;
     private final IntegerProperty hsnNumber;
     
@@ -20,24 +19,21 @@ public class Product {
         productID = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
         qtyAvailable = new SimpleIntegerProperty();
-        price = new SimpleFloatProperty();
         gstRate = new SimpleFloatProperty();
         hsnNumber = new SimpleIntegerProperty();
     }
-    public Product(String name,int qty,float price,float gst,int hsn){
+    public Product(String name,int qty,float gst,int hsn){
         productID = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty(name);
-        this.qtyAvailable = new SimpleIntegerProperty(qty);
-        this.price = new SimpleFloatProperty(price);
+        this.qtyAvailable = new SimpleIntegerProperty(qty);        
         this.gstRate = new SimpleFloatProperty(gst);
         this.hsnNumber = new SimpleIntegerProperty(hsn);
         
     }
-    public Product(int id,String name,int qty,float price,float gst,int hsn){
+    public Product(int id,String name,int qty,float gst,int hsn){
         productID = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.qtyAvailable = new SimpleIntegerProperty(qty);
-        this.price = new SimpleFloatProperty(price);
         this.gstRate = new SimpleFloatProperty(gst);
         this.hsnNumber = new SimpleIntegerProperty(hsn);
         
@@ -62,14 +58,6 @@ public class Product {
 
     public void setQtyAvailable(Integer qtyAvailable) {
         this.qtyAvailable.get();
-    }
-
-    public Float getPrice() {
-        return price.get();
-    }
-
-    public void setPrice(Float price) {
-        this.price.set(price);
     }
 
     public Float getGstRate() {

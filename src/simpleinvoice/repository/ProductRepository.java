@@ -29,9 +29,9 @@ public class ProductRepository {
 
     private ProductRepository() throws SQLException {
         initProductsRepositary();
-        this.insertProduct = Database.getConnection().prepareStatement("INSERT INTO simpleinvoice.product (product_name,product_qty,product_price,product_gst,product_hsn) VALUES (?,?,?,?,?)");
+        this.insertProduct = Database.getConnection().prepareStatement("INSERT INTO simpleinvoice.product (product_name,product_qty,product_gst,product_hsn) VALUES (?,?,?,?)");
         this.deleteProduct = Database.getConnection().prepareStatement("DELETE FROM simpleinvoice.product where product_id = ?");
-        this.updateProduct = Database.getConnection().prepareStatement("UPDATE simpleinvoice.product SET product_name = ? , product_qty = ?,product_price = ?, product_gst=?,product_hsn=? where product_id = ?");
+        this.updateProduct = Database.getConnection().prepareStatement("UPDATE simpleinvoice.product SET product_name = ? , product_qty = ?, product_gst=?,product_hsn=? where product_id = ?");
     }
 
     public static ProductRepository getProductRepository() throws SQLException {
@@ -44,10 +44,9 @@ public class ProductRepository {
     public void updateProduct(Product old, Product p) throws SQLException {
         this.updateProduct.setString(1, p.getName());
         this.updateProduct.setInt(2, p.getQtyAvailable());
-        this.updateProduct.setFloat(3, p.getPrice());
-        this.updateProduct.setFloat(4, p.getGstRate());
-        this.updateProduct.setFloat(5, p.getHsnNumber());
-        this.updateProduct.setInt(6, old.getProductID());
+        this.updateProduct.setFloat(3, p.getGstRate());
+        this.updateProduct.setFloat(4, p.getHsnNumber());
+        this.updateProduct.setInt(5, old.getProductID());
         p.setProductID(old.getProductID());
         updateProduct.execute();
         int i = PRODUCTS.indexOf(old);
@@ -59,10 +58,9 @@ public class ProductRepository {
 
     public void addNewProduct(Product p) throws SQLException {
         insertProduct.setString(1, p.getName());
-        insertProduct.setInt(2, p.getQtyAvailable());
-        insertProduct.setFloat(3, p.getPrice());
-        insertProduct.setFloat(4, p.getGstRate());
-        insertProduct.setInt(5, p.getHsnNumber());
+        insertProduct.setInt(2, p.getQtyAvailable());        
+        insertProduct.setFloat(3, p.getGstRate());
+        insertProduct.setInt(4, p.getHsnNumber());
         insertProduct.execute();
         PRODUCTS.clear();
         PRODUCT_NAME_LIST.clear();
@@ -110,7 +108,7 @@ public class ProductRepository {
         Database.getInstance();
         ResultSet rs = Database.executeQuery("select * from simpleinvoice.product");
         while (rs.next()) {
-            PRODUCTS.add(new Product(rs.getInt("product_id"),rs.getString("product_name"),rs.getInt("product_qty"),rs.getFloat("product_price"),rs.getFloat("product_gst"),rs.getInt("product_hsn")));
+            PRODUCTS.add(new Product(rs.getInt("product_id"),rs.getString("product_name"),rs.getInt("product_qty"),rs.getFloat("product_gst"),rs.getInt("product_hsn")));
             PRODUCT_NAME_LIST.add(rs.getString("product_name"));
         }
     }

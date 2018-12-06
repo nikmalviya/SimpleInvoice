@@ -1,7 +1,7 @@
 AnchorPane{
     -fx-background-color: white;
 }
-.jfx-text-field{
+.jfx-text-field,.text-field{
     -fx-font-size:17px;
     -fx-font-family:'ShureTechMono Nerd Font';
 }

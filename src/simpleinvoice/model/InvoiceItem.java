@@ -23,23 +23,30 @@ public class InvoiceItem {
     private final FloatProperty amount;
     private final StringProperty cgstWithamount;
     private final StringProperty sgstWithamount;
+    private boolean isGSTIncluded = false;
     private final NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("en","IN"));
 
-    public InvoiceItem(Product product,Integer srno,Integer quantity) {
+    public InvoiceItem(Product product,Integer srno,Integer quantity,Float price,boolean includesGST) {
         this.srno = new SimpleIntegerProperty(srno);
         this.productName = new SimpleStringProperty(product.getName());
         this.hsnNumber = new SimpleIntegerProperty(product.getHsnNumber());
-        this.rate = new SimpleFloatProperty(product.getPrice());
         this.gst = new SimpleFloatProperty(product.getGstRate());
         this.quantity = new SimpleIntegerProperty(quantity);
         this.cgstPercent = new SimpleFloatProperty(product.getGstRate()/2);
         this.sgstPercent = new SimpleFloatProperty(product.getGstRate()/2);
-        float price = this.rate.get() * quantity;
-        this.cgst = new SimpleFloatProperty((cgstPercent.get()*price)/100);
-        this.sgst = new SimpleFloatProperty((sgstPercent.get()*price)/100);
-        this.amount = new SimpleFloatProperty(price+cgst.get()+sgst.get());
+        float x = (100+gst.get())/100;
+        this.isGSTIncluded = includesGST;
+        this.rate = new SimpleFloatProperty(includesGST?price/x:price);
+        float p = this.rate.get() * quantity;
+        this.cgst = new SimpleFloatProperty((cgstPercent.get()*p)/100);
+        this.sgst = new SimpleFloatProperty((sgstPercent.get()*p)/100);
+        this.amount = new SimpleFloatProperty(p+cgst.get()+sgst.get());
         this.cgstWithamount = new SimpleStringProperty(format.format(cgst.get())+"\n   ("+cgstPercent.get()+"%)");
         this.sgstWithamount = new SimpleStringProperty(format.format(sgst.get())+"\n   ("+sgstPercent.get()+"%)");
+    }
+
+    public boolean isGSTIncluded() {
+        return isGSTIncluded;
     }
 
     public String getCgstWithamount() {

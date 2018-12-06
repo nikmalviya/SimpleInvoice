@@ -5,8 +5,14 @@
  */
 package simpleinvoice.controller;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,8 +22,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
@@ -28,7 +35,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import org.controlsfx.control.textfield.CustomTextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import simpleinvoice.model.InvoiceItem;
 import simpleinvoice.model.Product;
 import simpleinvoice.repository.ProductRepository;
@@ -51,13 +59,13 @@ public class InvoiceController implements Initializable {
     @FXML
     private TextField tfNetAmount;
     @FXML
-    private Button btnEdit;
+    private JFXButton btnEdit;
     @FXML
-    private Button btnRemove;
+    private JFXButton btnRemove;
     @FXML
-    private Button btnSave;
+    private JFXButton btnSave;
     @FXML
-    private Button btnCancel;
+    private JFXButton btnCancel;
     @FXML
     private CheckBox cbPrintOnSave;
     @FXML
@@ -67,7 +75,7 @@ public class InvoiceController implements Initializable {
     @FXML
     private TextField tfAmt;
     @FXML
-    private Button btnAdd;
+    private JFXButton btnAdd;
     @FXML
     private TableView<InvoiceItem> tblvInvoiceItems;
     @FXML
@@ -93,7 +101,7 @@ public class InvoiceController implements Initializable {
     @FXML
     private MenuItem miSearchFieldd;
     @FXML
-    private CustomTextField tfSearchProduct;
+    private TextField tfSearchProduct;
     @FXML
     private MenuItem miProductTable;
     @FXML
@@ -102,9 +110,15 @@ public class InvoiceController implements Initializable {
     private TableColumn<Product, Integer> tblcQty;
     @FXML
     private TableView<Product> tblvProduct;
+    private final NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
     private Product selectedProduct = null;
     private ObservableList<InvoiceItem> invoiceItems;
     private int srnoCounter = 1;
+    @FXML
+    private JFXCheckBox cboxIncludeGST;
+    @FXML
+    private JFXButton btnAddProduct;
+
     /**
      * Initializes the controller class.
      *
@@ -113,8 +127,13 @@ public class InvoiceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnAddProduct.setOnAction(this::addProduct);
+        btnRemove.setOnAction(this::removeInvoiceItem);
+        btnEdit.setOnAction(this::editInvoiceItem);
         initTableColumns();
         btnAdd.setOnAction(this::addInvoiceItem);
+        btnEdit.disableProperty().bind(tblvInvoiceItems.getSelectionModel().selectedItemProperty().isNull());
+        btnRemove.disableProperty().bind(tblvInvoiceItems.getSelectionModel().selectedItemProperty().isNull());
         invoiceItems = FXCollections.observableArrayList();
         tblvInvoiceItems.setItems(invoiceItems);
         tblvProduct.setOnMouseClicked(this::selectProduct);
@@ -125,9 +144,26 @@ public class InvoiceController implements Initializable {
             Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
         }
         tfQty.setText("0");
+        tfAmt.setText("0");
         tfRate.setText("0");
+        tfSubTotal.setText("Rs. 0");
+        tfDiscount.setText("0");
+        tfDiscount.setOnKeyReleased(this::subtractDiscount);
+        tfNetAmount.setText("Rs. 0");
         tfQty.setOnKeyReleased(e -> calculateAmount());
         tfRate.setOnKeyReleased(e -> calculateAmount());
+    }
+
+    private void subtractDiscount(KeyEvent e) {
+        float discount = (tfDiscount.getText().equals(""))?0f:Float.parseFloat(tfDiscount.getText());
+        float amount = 0;
+        try {
+            amount = formatter.parse(tfSubTotal.getText()).floatValue();
+        } catch (ParseException ex) {
+            Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        amount -= discount;
+        tfNetAmount.setText(formatter.format(amount));
     }
 
     private void calculateAmount() {
@@ -179,13 +215,53 @@ public class InvoiceController implements Initializable {
         if (!tblvProduct.getItems().isEmpty()) {
             selectedProduct = tblvProduct.getSelectionModel().getSelectedItem();
             mbProduct.setText(tblvProduct.getSelectionModel().getSelectedItem().getName());
-            tfRate.setText(String.valueOf(selectedProduct.getPrice()));
             mbProduct.hide();
-            tfQty.requestFocus();
+            tfRate.requestFocus();
         }
     }
-    private void addInvoiceItem(ActionEvent e){
-        invoiceItems.add(new InvoiceItem(selectedProduct,srnoCounter++, Integer.parseInt(tfQty.getText())));
+
+    private void addInvoiceItem(ActionEvent e) {
+        invoiceItems.add(new InvoiceItem(selectedProduct, srnoCounter++, Integer.parseInt(tfQty.getText()),Float.parseFloat(tfRate.getText()),cboxIncludeGST.isSelected()));
+        mbProduct.setText("Select Product");
+        tfRate.setText("0");
+        tfQty.setText("0");
+        tfAmt.setText("0");
+        if (!tblvInvoiceItems.getItems().isEmpty()) {
+            float sum = 0;
+            for (InvoiceItem invoiceItem : invoiceItems) {
+                sum += invoiceItem.getAmount();
+            }
+            tfSubTotal.setText(formatter.format(sum));
+            tfNetAmount.setText(formatter.format(sum));
+        }
+        tfSearchProduct.clear();
+        cboxIncludeGST.selectedProperty().set(false);
+    }
+    private void addProduct(ActionEvent e){
+        AnchorPane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/simpleinvoice/view/addProduct.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Stage stage = new Stage();
+        stage.setScene(new Scene(pane));
+        stage.show();
+    }
+    private void editInvoiceItem(ActionEvent e){
+        InvoiceItem item = tblvInvoiceItems.getSelectionModel().getSelectedItem();
+        invoiceItems.remove(item);
+        srnoCounter--;
+        mbProduct.setText(item.getProductName());
+        tfRate.setText(String.valueOf(item.isGSTIncluded()?item.getAmount()/item.getQuantity():item.getRate()));
+        tfQty.setText(String.valueOf(item.getQuantity()));
+        tfAmt.setText(String.valueOf(item.isGSTIncluded()?item.getAmount():item.getRate()*item.getQuantity()));
+        cboxIncludeGST.selectedProperty().set(item.isGSTIncluded());
+    }
+    private void removeInvoiceItem(ActionEvent e){
+        InvoiceItem item = tblvInvoiceItems.getSelectionModel().getSelectedItem();
+        invoiceItems.remove(item);
+        srnoCounter--;
     }
 
 }

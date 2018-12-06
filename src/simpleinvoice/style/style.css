@@ -3,7 +3,18 @@
     -fx-secondary:#8145b8;
     -fx-dark:#1d0059;
 }
-
+.label{
+    -fx-font-weight:700;
+}
+.menu-item:hover{
+    -fx-background-color: white;
+}
+.menu-item:hover .label{
+    -fx-text-fill:black;
+}
+.date-picker:focused{
+    -fx-background-color: #501787;
+}
 .heading{
     -fx-font-family:'ShureTechMono Nerd Font';
     -fx-font-size:32px;
@@ -37,11 +48,40 @@
     -fx-padding: 5px 35px 5px 15px;
     -fx-background-color: white;
 }
+.text-field{
+    -fx-border-width: 0.7px;
+    -fx-border-color: #D7D7D7;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-alignment: center;
+    -fx-text-fill: black;
+    -fx-font-size: 15px; 
+    -fx-padding: 5px 5px 5px 10px;
+    -fx-background-color: white;
+}
+.text-field:focused{
+    -fx-border-color: #501787;
+}
 #searchTextField:focused{
     -fx-border-color: #501787;
 
 }
-.combo-box{
+.menu-button{
+    -fx-border-width: 0.7px;
+    -fx-border-color: #D7D7D7;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 15px; 
+    -fx-padding: 0px 5px 0px 5px;    
+    -fx-background-color: white;
+    -fx-font-family: 'ShureTechMono Nerd Font';
+}
+.menu-button:focused{
+    -fx-border-color: #501787;
+}
+/*.combo-box{
     -fx-border-width: 0.5px;
     -fx-border-color: #501787;
     -fx-border-radius: 50px;
@@ -51,8 +91,8 @@
     -fx-padding: 0px;
     -fx-font-weight:700;
     -fx-font-family: 'ShureTechMono Nerd Font';
-}
-.combo-box:hover .list-cell{
+}*/
+/*.combo-box:hover .list-cell{
     -fx-text-fill: white;
 }
 .combo-box:focused .list-cell{
@@ -92,24 +132,18 @@
 .combo-box .list-view .list-cell:selected {
     -fx-text-fill: white;
     -fx-background-color: #501787;
-}
+}*/
 
 AnchorPane{
     -fx-background-color:whitesmoke;
 }
 .table-cell {
-    -fx-padding: 0.8em 0.3em 0.5em 0.3em;
+    -fx-padding: 0.1em 0.1em 0.1em 0.1em;
     -fx-border-color: transparent -fx-box-border transparent transparent;
     -fx-font: 15px 'ShureTechMono Nerd Font';
     -fx-alignment: center;
     -fx-font-weight: 500;
     -fx-text-fill: #212121;
-}
-#examTableView .table-cell{
-    -fx-padding: 0.4em 0.3em 0.3em 0.3em;
-}
-#subjectsTableView .table-cell{
-    -fx-padding: 0.2em 0.2em 0.2em 0.2em;
 }
 .table-view {
     -fx-table-header-border-color: #959595;

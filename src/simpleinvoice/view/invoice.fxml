@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import org.controlsfx.control.textfield.*?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -21,24 +23,24 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simpleinvoice.controller.InvoiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="1000.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simpleinvoice.controller.InvoiceController">
    <children>
       <BorderPane prefHeight="597.0" prefWidth="865.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <top>
             <AnchorPane prefHeight="167.0" prefWidth="845.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" layoutX="391.0" layoutY="14.0" prefHeight="21.0" prefWidth="150.0" text="TAX INVOICE">
+                  <Label alignment="CENTER" layoutX="419.0" layoutY="14.0" prefHeight="21.0" prefWidth="150.0" text="TAX INVOICE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="466.0" layoutY="94.0" text="Invoice Date:">
+                  <Label layoutX="527.0" layoutY="94.0" text="Invoice Date:">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dpInvoiceDate" layoutX="601.0" layoutY="89.0" />
-                  <Label layoutX="466.0" layoutY="54.0" text="Invoice No. :">
+                  <DatePicker fx:id="dpInvoiceDate" layoutX="662.0" layoutY="89.0" />
+                  <Label layoutX="527.0" layoutY="54.0" text="Invoice No. :">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -58,13 +60,15 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="465.0" layoutY="131.0" text="Party GSTIN : ">
+                  <Label layoutX="526.0" layoutY="131.0" text="Party GSTIN : ">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
                   <TextField fx:id="tfCustName" layoutX="202.0" layoutY="49.0" />
-                  <Button layoutX="384.0" layoutY="47.0" mnemonicParsing="false" text="+" />
+                  <JFXButton layoutX="406.0" layoutY="49.0" mnemonicParsing="false" text="+" />
+                  <JFXCheckBox fx:id="cboxIncludeGST" layoutX="662.0" layoutY="162.0" text=" " />
+                  <Label layoutX="523.0" layoutY="163.0" text="Includes GST:" />
                </children>
                <BorderPane.margin>
                   <Insets />
@@ -107,14 +111,17 @@
                                     <Insets left="10.0" />
                                  </padding></Label>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
-                        <HBox spacing="50.0">
+                        <HBox spacing="40.0">
                            <children>
-                              <MenuButton fx:id="mbProduct" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="300.0" text="Select Product">
+                              <MenuButton fx:id="mbProduct" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="310.0" text="Select Product">
                                 <items>
                                   <MenuItem fx:id="miSearchFieldd" mnemonicParsing="false">
                                        <graphic>
-                                          <CustomTextField fx:id="tfSearchProduct" prefWidth="300.0" promptText="Search" />
+                                          <TextField fx:id="tfSearchProduct" prefWidth="300.0" promptText="Search" style="-fx-alignment: center_left;" />
                                        </graphic>
                                     </MenuItem>
                                   <MenuItem fx:id="miProductTable" mnemonicParsing="false">
@@ -129,30 +136,33 @@
                                     </MenuItem>
                                 </items>
                               </MenuButton>
-                              <Button mnemonicParsing="false" text="+">
+                              <JFXButton fx:id="btnAddProduct" mnemonicParsing="false" text="+">
                                  <HBox.margin>
-                                    <Insets left="-40.0" />
+                                    <Insets left="-30.0" />
                                  </HBox.margin>
-                              </Button>
-                              <TextField fx:id="tfRate" prefHeight="26.0" prefWidth="100.0" />
-                              <TextField fx:id="tfQty" prefHeight="26.0" prefWidth="80.0" />
-                              <TextField fx:id="tfAmt" prefHeight="26.0" prefWidth="100.0" />
-                              <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Add" />
+                              </JFXButton>
+                              <TextField fx:id="tfRate" prefHeight="26.0" prefWidth="110.0" />
+                              <TextField fx:id="tfQty" prefHeight="26.0" prefWidth="90.0" />
+                              <TextField fx:id="tfAmt" prefHeight="26.0" prefWidth="110.0" />
+                              <JFXButton fx:id="btnAdd" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Add" />
                            </children>
+                           <VBox.margin>
+                              <Insets left="-10.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
                   <TableView fx:id="tblvInvoiceItems" layoutX="50.0" layoutY="71.0" prefHeight="200.0" prefWidth="758.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                     <columns>
-                        <TableColumn fx:id="tblcSrNo" prefWidth="59.0" text="SNo." />
-                      <TableColumn fx:id="tblcProductDes" prefWidth="239.0" text="Product Description" />
-                        <TableColumn fx:id="tblcHsnNo" prefWidth="85.0" text="HSN No." />
-                        <TableColumn fx:id="tblcGstRate" prefWidth="59.0" text="GST" />
-                        <TableColumn fx:id="tblcQuantity" minWidth="6.0" prefWidth="61.0" text="Qty" />
-                        <TableColumn fx:id="tblcRate" prefWidth="98.0" text="Rate" />
-                        <TableColumn fx:id="tblcCgstRate" prefWidth="82.0" text="CGST(%) " />
-                        <TableColumn fx:id="tblcSgstRate" prefWidth="76.0" text="SGST(%)" />
-                        <TableColumn fx:id="tblcAmount" prefWidth="169.0" text="Amount" />
+                        <TableColumn fx:id="tblcSrNo" prefWidth="46.0" text="SNo." />
+                      <TableColumn fx:id="tblcProductDes" prefWidth="221.0" text="Product Description" />
+                        <TableColumn fx:id="tblcHsnNo" prefWidth="81.0" text="HSN No." />
+                        <TableColumn fx:id="tblcGstRate" prefWidth="51.0" text="GST" />
+                        <TableColumn fx:id="tblcQuantity" minWidth="6.0" prefWidth="46.0" text="Qty" />
+                        <TableColumn fx:id="tblcRate" prefWidth="122.0" text="Rate(In ₹)" />
+                        <TableColumn fx:id="tblcCgstRate" prefWidth="116.0" text="CGST(%) " />
+                        <TableColumn fx:id="tblcSgstRate" prefWidth="112.0" text="SGST(%)" />
+                        <TableColumn fx:id="tblcAmount" prefWidth="133.0" text="Amount(In ₹)" />
                     </columns>
                   </TableView>
                </children>
@@ -161,7 +171,7 @@
          <bottom>
             <AnchorPane prefHeight="188.0" prefWidth="980.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER_RIGHT" layoutX="571.0" prefHeight="160.0" prefWidth="144.0" spacing="20.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER_RIGHT" layoutX="554.0" prefHeight="160.0" prefWidth="161.0" spacing="20.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Sub Total (₹) :" />
                         <Label text="Discount (If Any ₹) :" />
@@ -175,10 +185,10 @@
                         <TextField fx:id="tfNetAmount" />
                      </children>
                   </VBox>
-                  <Button fx:id="btnEdit" layoutX="29.0" layoutY="14.0" mnemonicParsing="false" text="Edit" />
-                  <Button fx:id="btnRemove" layoutX="91.0" layoutY="14.0" mnemonicParsing="false" text="Remove" />
-                  <Button fx:id="btnSave" layoutX="435.0" layoutY="128.0" mnemonicParsing="false" text="Save" />
-                  <Button fx:id="btnCancel" layoutX="508.0" layoutY="128.0" mnemonicParsing="false" text="Cancel" />
+                  <JFXButton fx:id="btnEdit" layoutX="29.0" layoutY="14.0" mnemonicParsing="false" text="Edit" />
+                  <JFXButton fx:id="btnRemove" layoutX="91.0" layoutY="14.0" mnemonicParsing="false" text="Remove" />
+                  <JFXButton fx:id="btnSave" layoutX="435.0" layoutY="128.0" mnemonicParsing="false" text="Save" />
+                  <JFXButton fx:id="btnCancel" layoutX="508.0" layoutY="128.0" mnemonicParsing="false" text="Cancel" />
                   <CheckBox fx:id="cbPrintOnSave" layoutX="307.0" layoutY="132.0" mnemonicParsing="false" text="Print On Save" />
                </children>
             </AnchorPane>

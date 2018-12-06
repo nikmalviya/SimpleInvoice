@@ -24,8 +24,6 @@ public class ViewProductController implements Initializable {
     @FXML
     private Label lblQty;
     @FXML
-    private Label lblPrice;
-    @FXML
     private Label lblGst;
     @FXML
     private Label lblHSN;
@@ -40,7 +38,6 @@ public class ViewProductController implements Initializable {
         lblProductName.setText(product.getName());
         lblQty.setText(String.valueOf(product.getQtyAvailable()));
         NumberFormat india = NumberFormat.getCurrencyInstance(new Locale("en","IN"));
-        lblPrice.setText(india.format(product.getPrice()));
         lblGst.setText(String.valueOf(product.getGstRate()));
         lblHSN.setText(String.valueOf(product.getHsnNumber()));
     }

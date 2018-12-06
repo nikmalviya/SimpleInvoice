@@ -25,8 +25,6 @@ public class AddProductController implements Initializable {
     @FXML
     private JFXTextField tfQty;
     @FXML
-    private JFXTextField tfPrice;
-    @FXML
     private JFXTextField tfGST;
     @FXML
     private JFXTextField tfHSN;
@@ -70,7 +68,6 @@ public class AddProductController implements Initializable {
                 ProductRepository.getProductRepository().updateProduct(old, new Product(
                         tfProductName.getText().trim(),
                         Integer.parseInt(tfQty.getText().trim()),
-                        Float.parseFloat(tfPrice.getText().trim()),
                         Float.parseFloat(tfGST.getText().trim()),
                         Integer.parseInt(tfHSN.getText().trim())
                 ));
@@ -78,7 +75,6 @@ public class AddProductController implements Initializable {
                 ProductRepository.getProductRepository().addNewProduct(new Product(
                         tfProductName.getText().trim(),
                         Integer.parseInt(tfQty.getText().trim()),
-                        Float.parseFloat(tfPrice.getText().trim()),
                         Float.parseFloat(tfGST.getText().trim()),
                         Integer.parseInt(tfHSN.getText().trim())
                 ));
@@ -93,7 +89,6 @@ public class AddProductController implements Initializable {
         old = product;
         tfProductName.setText(product.getName());
         tfQty.setText(String.valueOf(product.getQtyAvailable()));
-        tfPrice.setText(String.valueOf(product.getPrice()));
         tfGST.setText(String.valueOf(product.getGstRate()));
         tfHSN.setText(String.valueOf(product.getHsnNumber()));
         isUpdateMode.set(true);

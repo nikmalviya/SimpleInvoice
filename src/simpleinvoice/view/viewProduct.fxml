@@ -30,7 +30,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <VBox.margin>
                   <Insets top="15.0" />
@@ -62,7 +61,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Label text="Quantuty Available:" GridPane.rowIndex="2">
+                  <Label text="Quantity Available:" GridPane.rowIndex="2">
                      <padding>
                         <Insets left="35.0" />
                      </padding>
@@ -75,7 +74,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Label text="Price:" GridPane.rowIndex="3">
+                  <Label text="GST Rate(%):" GridPane.rowIndex="3">
                      <padding>
                         <Insets left="35.0" />
                      </padding>
@@ -83,12 +82,12 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblPrice" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="lblGst" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Label text="GST Rate(%):" GridPane.rowIndex="4">
+                  <Label text="HSN No.:" GridPane.rowIndex="4">
                      <padding>
                         <Insets left="35.0" />
                      </padding>
@@ -96,20 +95,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblGst" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <padding>
-                        <Insets left="5.0" />
-                     </padding>
-                  </Label>
-                  <Label text="HSN No.:" GridPane.rowIndex="5">
-                     <padding>
-                        <Insets left="35.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblHSN" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label fx:id="lblHSN" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <padding>
                         <Insets left="5.0" />
                      </padding>

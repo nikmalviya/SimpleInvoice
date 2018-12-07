@@ -10,8 +10,10 @@ import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,8 +27,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -37,8 +39,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import simpleinvoice.model.Customer;
 import simpleinvoice.model.InvoiceItem;
 import simpleinvoice.model.Product;
+import simpleinvoice.repository.CustomerRepository;
 import simpleinvoice.repository.ProductRepository;
 
 /**
@@ -50,8 +54,6 @@ public class InvoiceController implements Initializable {
 
     @FXML
     private DatePicker dpInvoiceDate;
-    @FXML
-    private TextField tfCustName;
     @FXML
     private TextField tfSubTotal;
     @FXML
@@ -66,8 +68,6 @@ public class InvoiceController implements Initializable {
     private JFXButton btnSave;
     @FXML
     private JFXButton btnCancel;
-    @FXML
-    private CheckBox cbPrintOnSave;
     @FXML
     private TextField tfRate;
     @FXML
@@ -112,12 +112,35 @@ public class InvoiceController implements Initializable {
     private TableView<Product> tblvProduct;
     private final NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
     private Product selectedProduct = null;
+    private Customer selectedCustomer = null;
     private ObservableList<InvoiceItem> invoiceItems;
     private int srnoCounter = 1;
     @FXML
     private JFXCheckBox cboxIncludeGST;
     @FXML
     private JFXButton btnAddProduct;
+    @FXML
+    private TextField tfInvoiceNo;
+    @FXML
+    private JFXButton btnAddCust;
+    @FXML
+    private Label lblGST;
+    @FXML
+    private Label lblContact;
+    @FXML
+    private Label lblAddress;
+    @FXML
+    private MenuItem miSearchFielddCust;
+    @FXML
+    private TextField tfSearchCust;
+    @FXML
+    private MenuItem miCustTable;
+    @FXML
+    private TableView<Customer> tblvCustomer;
+    @FXML
+    private TableColumn<Customer,String> tblcCustName;
+    @FXML
+    private MenuButton mbCustomer;
 
     /**
      * Initializes the controller class.
@@ -127,7 +150,11 @@ public class InvoiceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tblvInvoiceItems.setPlaceholder(new Label("No Products Added.."));
+        LocalDate date = LocalDate.now();
+        dpInvoiceDate.setValue(date);
         btnAddProduct.setOnAction(this::addProduct);
+        btnAddCust.setOnAction(this::addCustomer);
         btnRemove.setOnAction(this::removeInvoiceItem);
         btnEdit.setOnAction(this::editInvoiceItem);
         initTableColumns();
@@ -137,9 +164,12 @@ public class InvoiceController implements Initializable {
         invoiceItems = FXCollections.observableArrayList();
         tblvInvoiceItems.setItems(invoiceItems);
         tblvProduct.setOnMouseClicked(this::selectProduct);
+        tblvCustomer.setOnMouseClicked(this::selectCustomer);
         tfSearchProduct.setOnKeyReleased(this::search);
+        tfSearchCust.setOnKeyReleased(this::searchCustomers);
         try {
             initProductsTable();
+            initCustomersTable();
         } catch (SQLException ex) {
             Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -189,6 +219,11 @@ public class InvoiceController implements Initializable {
         tblcQty.setCellValueFactory(new PropertyValueFactory<>("qtyAvailable"));
         tblvProduct.setItems(ProductRepository.getProductRepository().getProducts());
     }
+    private void initCustomersTable() throws SQLException {
+        tblcCustName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        tblvCustomer.setItems(CustomerRepository.getCustomerRepository().getCustomers());
+    }
+    
 
     private void search(KeyEvent e) {
         FilteredList<Product> filter;
@@ -210,6 +245,26 @@ public class InvoiceController implements Initializable {
             tblvProduct.setItems(sort);
         });
     }
+    private void searchCustomers(KeyEvent e) {
+        FilteredList<Customer> filter;
+        filter = new FilteredList<>(tblvCustomer.getItems(), p -> true);
+        tfSearchCust.textProperty().addListener((ob, o, n) -> {
+            filter.setPredicate(c -> {
+                if (n.isEmpty() || n == null) {
+                    return true;
+                } else if (c.getCustomerName().toLowerCase().contains(n.toLowerCase())) {
+                    return true;
+                } else if (String.valueOf(c.getCustomerID()).toLowerCase().contains(n.toLowerCase())) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            SortedList sort = new SortedList(filter);
+            sort.comparatorProperty().bind(tblvCustomer.comparatorProperty());
+            tblvCustomer.setItems(sort);
+        });
+    }
 
     private void selectProduct(MouseEvent e) {
         if (!tblvProduct.getItems().isEmpty()) {
@@ -217,6 +272,16 @@ public class InvoiceController implements Initializable {
             mbProduct.setText(tblvProduct.getSelectionModel().getSelectedItem().getName());
             mbProduct.hide();
             tfRate.requestFocus();
+        }
+    }
+    private void selectCustomer(MouseEvent e) {
+        if (!tblvCustomer.getItems().isEmpty()) {
+            selectedCustomer = tblvCustomer.getSelectionModel().getSelectedItem();
+            mbCustomer.setText(tblvCustomer.getSelectionModel().getSelectedItem().getCustomerName());
+            lblContact.setText(selectedCustomer.getContactNumber());
+            lblAddress.setText(selectedCustomer.getAddress());
+            lblGST.setText(selectedCustomer.getPartyGSTNo());
+            mbCustomer.hide();            
         }
     }
 
@@ -248,14 +313,25 @@ public class InvoiceController implements Initializable {
         stage.setScene(new Scene(pane));
         stage.show();
     }
+    private void addCustomer(ActionEvent e){
+        AnchorPane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/simpleinvoice/view/addCustomer.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Stage stage = new Stage();
+        stage.setScene(new Scene(pane));
+        stage.show();
+    }
     private void editInvoiceItem(ActionEvent e){
         InvoiceItem item = tblvInvoiceItems.getSelectionModel().getSelectedItem();
         invoiceItems.remove(item);
         srnoCounter--;
         mbProduct.setText(item.getProductName());
-        tfRate.setText(String.valueOf(item.isGSTIncluded()?item.getAmount()/item.getQuantity():item.getRate()));
+        tfRate.setText(new DecimalFormat("#0.00").format(item.isGSTIncluded()?item.getAmount()/item.getQuantity():item.getRate()));
         tfQty.setText(String.valueOf(item.getQuantity()));
-        tfAmt.setText(String.valueOf(item.isGSTIncluded()?item.getAmount():item.getRate()*item.getQuantity()));
+        tfAmt.setText(new DecimalFormat("#0.00").format(item.isGSTIncluded()?item.getAmount():item.getRate()*item.getQuantity()));
         cboxIncludeGST.selectedProperty().set(item.isGSTIncluded());
     }
     private void removeInvoiceItem(ActionEvent e){

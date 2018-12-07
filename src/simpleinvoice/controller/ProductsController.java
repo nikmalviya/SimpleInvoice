@@ -68,14 +68,6 @@ public class ProductsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        productTableView.getItems().clear();
-//        ObservableList<Product> products = FXCollections.observableArrayList();
-//        products.add(new Product(1,"Nikhil",4,2.5f,15f,123312));
-//        products.add(new Product(1,"Nikhil",4,2.5f,15f,123312));
-//        products.add(new Product(1,"Nikhil",4,2.5f,15f,123312));
-//        products.add(new Product(1,"Nikhil",4,2.5f,15f,123312));
-//        products.add(new Product(1,"Nikhil",4,2.5f,15f,123312));
-//        productTableView.setItems(products);
         searchTextField.setOnKeyReleased(this::search);
         refreshButton.setOnMouseClicked(e -> {
             try {

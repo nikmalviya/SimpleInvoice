@@ -3,6 +3,9 @@
     -fx-secondary:#8145b8;
     -fx-dark:#1d0059;
 }
+.result{
+    -fx-font-weight:normal;
+}
 .label{
     -fx-font-weight:700;
 }
@@ -56,7 +59,7 @@
     -fx-alignment: center;
     -fx-text-fill: black;
     -fx-font-size: 15px; 
-    -fx-padding: 5px 5px 5px 10px;
+    -fx-padding: 5px 5px 5px 8px;
     -fx-background-color: white;
 }
 .text-field:focused{

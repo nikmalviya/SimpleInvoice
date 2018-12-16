@@ -4,7 +4,8 @@
     -fx-dark:#1d0059;
 }
 .result{
-    -fx-font-weight:normal;
+    -fx-font-family: 'ShureTechMono Nerd Font';
+    -fx-font-size:15px;
 }
 .label{
     -fx-font-weight:700;

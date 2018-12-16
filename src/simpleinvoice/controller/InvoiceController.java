@@ -7,14 +7,19 @@ package simpleinvoice.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +44,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import simpleinvoice.model.Customer;
 import simpleinvoice.model.InvoiceItem;
 import simpleinvoice.model.Product;
@@ -150,6 +159,7 @@ public class InvoiceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnSave.setOnAction(this::previewInvoice);
         tblvInvoiceItems.setPlaceholder(new Label("No Products Added.."));
         LocalDate date = LocalDate.now();
         dpInvoiceDate.setValue(date);
@@ -338,6 +348,33 @@ public class InvoiceController implements Initializable {
         InvoiceItem item = tblvInvoiceItems.getSelectionModel().getSelectedItem();
         invoiceItems.remove(item);
         srnoCounter--;
+    }
+    private void previewInvoice(ActionEvent e){
+        Map map = getInvoiceParameters();
+        String reportPath = "/simpleinvoice/reports/invoice.jasper";
+        JasperPrint print = null;
+       
+        try(InputStream in = getClass().getResourceAsStream(reportPath)){
+            print = JasperFillManager.fillReport(in, map);
+        } catch(Exception ex){
+            System.out.println(ex);
+            return;
+        }
+        JasperViewer viewer = new JasperViewer(print,false);
+        viewer.setTitle("INVOICE");
+        viewer.setVisible(true);
+        
+        
+    }
+    private Map getInvoiceParameters(){
+        HashMap map = new HashMap(6);
+        map.put("customerName",mbCustomer.getText().trim());
+        map.put("contactNumber",lblContact.getText().trim());
+        map.put("address", lblAddress.getText().trim());
+        map.put("invoiceNo", tfInvoiceNo.getText().trim());
+        map.put("invoiceDate", dpInvoiceDate.getValue().toString());
+        map.put("partyGSTN", lblGST.getText().trim());
+        return map;
     }
 
 }

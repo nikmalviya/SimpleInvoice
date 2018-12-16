@@ -1,0 +1,44 @@
+*{
+    -fx-primary:#501787;
+    -fx-secondary:#8145b8;
+    -fx-dark:#1d0059;
+}
+.side-pane{
+    -fx-background-color: -fx-primary;
+}
+.side-pane .label{
+    -fx-text-fill: white;
+    -fx-font-size:24px;
+    -fx-font-family:'ShureTechMono Nerd Font';
+}
+.side-pane .jfx-button{
+    -fx-font-size:18px;
+    -fx-text-fill: white;
+    -fx-background-color: #501787;
+    -fx-border-width: 1px;
+    -fx-border-color: -fx-primary;
+    -fx-font-family:'ShureTechMono Nerd Font';
+}
+.side-pane .jfx-button:hover{
+    -fx-background-radius:40px;
+    -fx-border-radius: 40px;
+    -fx-border-color: -fx-dark;
+    -fx-border-width: 1px;
+    -fx-background-color: -fx-secondary;
+}
+.side-pane .jfx-button:focused{
+    -fx-background-radius:40px ;
+    -fx-border-radius: 40px;
+    -fx-border-color: -fx-dark;
+    -fx-border-width: 1px;
+    -fx-background-color: -fx-secondary;
+}
+.jfx-hamburger-icon{
+    -fx-spacing:7;
+    
+}
+.jfx-hamburger StackPane{
+    -fx-backround-radius:5px;
+    -fx-background-color: #1d0059;
+}
+

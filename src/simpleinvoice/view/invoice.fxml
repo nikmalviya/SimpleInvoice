@@ -30,73 +30,81 @@
          <top>
             <AnchorPane prefHeight="167.0" prefWidth="845.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" layoutX="433.0" layoutY="14.0" prefHeight="21.0" prefWidth="150.0" text="TAX INVOICE">
+                  <Label alignment="CENTER" layoutX="502.0" layoutY="14.0" prefHeight="21.0" prefWidth="150.0" text="TAX INVOICE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="564.0" layoutY="97.0" text="Invoice Date:">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="dpInvoiceDate" layoutX="699.0" layoutY="92.0" />
-                  <Label layoutX="564.0" layoutY="54.0" text="Invoice No. :">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="55.0" layoutY="52.0" text="Customer Name: ">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="55.0" layoutY="116.0" text="Address:">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="55.0" layoutY="88.0" text="Contact No. :">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="563.0" layoutY="142.0" text="Party GSTIN : ">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="tfInvoiceNo" layoutX="699.0" layoutY="50.0" prefHeight="31.0" prefWidth="144.0" />
-                  <MenuButton fx:id="mbCustomer" layoutX="191.0" layoutY="47.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="278.0" text="Select Customer">
-                     <items>
-                        <MenuItem fx:id="miSearchFielddCust" mnemonicParsing="false">
+                  <AnchorPane layoutX="563.0" layoutY="50.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="60.0">
+                     <children>
+                        <Label layoutX="1.0" layoutY="4.0" text="Invoice No. :">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfInvoiceNo" layoutX="136.0" prefHeight="31.0" prefWidth="144.0" />
+                        <Label fx:id="lblGST" layoutX="136.0" layoutY="91.0" style="-fx-font-weight: normal;" styleClass="result" />
+                        <Label layoutX="1.0" layoutY="47.0" text="Invoice Date:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutY="92.0" text="Party GSTIN : ">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="dpInvoiceDate" layoutX="136.0" layoutY="42.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="55.0" layoutY="44.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="60.0">
+                     <children>
+                        <Label layoutY="44.0" text="Contact No. :">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="btnAddCust" contentDisplay="GRAPHIC_ONLY" layoutX="420.0" mnemonicParsing="false">
                            <graphic>
-                              <TextField fx:id="tfSearchCust" prefWidth="250.0" promptText="Search" style="-fx-alignment: center_left;" />
+                              <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/plus.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
-                        </MenuItem>
-                        <MenuItem fx:id="miCustTable" mnemonicParsing="false">
-                           <graphic>
-                              <TableView fx:id="tblvCustomer" prefHeight="250.0" prefWidth="250.0">
-                                 <columns>
-                                    <TableColumn fx:id="tblcCustName" prefWidth="250.0" text="Customers" />
-                                 </columns>
-                              </TableView>
-                           </graphic>
-                        </MenuItem>
-                     </items>
-                  </MenuButton>
-                  <JFXButton fx:id="btnAddCust" contentDisplay="GRAPHIC_ONLY" layoutX="475.0" layoutY="44.0" mnemonicParsing="false">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/plus.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <Label fx:id="lblGST" layoutX="699.0" layoutY="146.0" style="-fx-font-weight: normal;" styleClass="result" />
-                  <Label fx:id="lblContact" layoutX="192.0" layoutY="89.0" style="-fx-font-weight: normal;" styleClass="result" />
-                  <Label fx:id="lblAddress" layoutX="191.0" layoutY="116.0" style="-fx-font-weight: normal;" styleClass="result" />
+                        </JFXButton>
+                        <Label layoutY="8.0" text="Customer Name: ">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutY="79.0" text="Address       :">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblAddress" layoutX="136.0" layoutY="78.0" style="-fx-font-weight: normal;" styleClass="result" />
+                        <MenuButton fx:id="mbCustomer" layoutX="136.0" layoutY="3.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="278.0" text="Select Customer">
+                           <items>
+                              <MenuItem fx:id="miSearchFielddCust" mnemonicParsing="false">
+                                 <graphic>
+                                    <TextField fx:id="tfSearchCust" prefWidth="250.0" promptText="Search" style="-fx-alignment: center_left;" />
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem fx:id="miCustTable" mnemonicParsing="false">
+                                 <graphic>
+                                    <TableView fx:id="tblvCustomer" prefHeight="250.0" prefWidth="250.0">
+                                       <columns>
+                                          <TableColumn fx:id="tblcCustName" prefWidth="250.0" text="Customers" />
+                                       </columns>
+                                    </TableView>
+                                 </graphic>
+                              </MenuItem>
+                           </items>
+                        </MenuButton>
+                        <Label fx:id="lblContact" layoutX="137.0" layoutY="45.0" style="-fx-font-weight: normal;" styleClass="result" />
+                     </children>
+                  </AnchorPane>
                </children>
                <BorderPane.margin>
                   <Insets />
@@ -217,7 +225,7 @@
             </AnchorPane>
          </center>
          <bottom>
-            <AnchorPane prefHeight="188.0" prefWidth="980.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="180.0" prefWidth="980.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER_RIGHT" layoutX="554.0" prefHeight="160.0" prefWidth="161.0" spacing="20.0" AnchorPane.topAnchor="0.0">
                      <children>

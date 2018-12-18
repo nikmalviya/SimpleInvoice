@@ -7,8 +7,6 @@ package simpleinvoice.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -44,9 +42,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import simpleinvoice.model.Customer;
 import simpleinvoice.model.InvoiceItem;
@@ -355,9 +353,10 @@ public class InvoiceController implements Initializable {
         JasperPrint print = null;
        
         try(InputStream in = getClass().getResourceAsStream(reportPath)){
-            print = JasperFillManager.fillReport(in, map);
+            print = JasperFillManager.fillReport(in, map,new JRBeanCollectionDataSource(tblvInvoiceItems.getItems(),true));
         } catch(Exception ex){
             System.out.println(ex);
+            ex.printStackTrace();
             return;
         }
         JasperViewer viewer = new JasperViewer(print,false);

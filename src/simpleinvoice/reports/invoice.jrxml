@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c8ed6448-f591-47e3-b7fa-08b55947a786">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="171"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="87"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#1B4EA7"/>
@@ -23,12 +23,42 @@
 			<pen lineWidth="0.5" lineColor="#1B4EA7"/>
 		</box>
 	</style>
-	<parameter name="customerName" class="java.lang.String" isForPrompting="false"/>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="6ec5d483-0844-4621-90a7-b0f6f91dd8db"/>
 	<parameter name="contactNumber" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="address" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="invoiceNo" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="invoiceDate" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="partyGSTN" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="customerName" class="java.lang.String" isForPrompting="false"/>
+	<field name="srno" class="java.lang.Integer"/>
+	<field name="productName" class="java.lang.String"/>
+	<field name="hsnNumber" class="java.lang.Integer"/>
+	<field name="gst" class="java.lang.Float"/>
+	<field name="quantity" class="java.lang.Integer"/>
+	<field name="rate" class="java.lang.Float"/>
+	<field name="cgstWithamount" class="java.lang.String"/>
+	<field name="sgstWithamount" class="java.lang.String"/>
+	<field name="amount" class="java.lang.Float"/>
 	<filterExpression><![CDATA[new Boolean(true)]]></filterExpression>
 	<background>
 		<band splitType="Stretch"/>
@@ -66,7 +96,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="95" splitType="Stretch">
+		<band height="96" splitType="Stretch">
 			<rectangle radius="10">
 				<reportElement x="0" y="0" width="555" height="95" uuid="3327e243-379c-4212-8738-800729444ccc"/>
 			</rectangle>
@@ -120,13 +150,6 @@
 				<text><![CDATA[Address  :-]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="148" y="20" width="138" height="15" uuid="9f7e9394-8038-4619-b08a-0f43339eaa03"/>
-				<textElement>
-					<font fontName="Roboto" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{customerName}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
 				<reportElement x="148" y="40" width="138" height="15" uuid="b8f6fc40-8c08-4e76-a996-0b9a52f00356"/>
 				<textElement>
 					<font fontName="Roboto" isBold="true"/>
@@ -161,16 +184,238 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{partyGSTN}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="148" y="20" width="138" height="15" uuid="0ae609dd-4e0a-4145-b178-93bd27440229"/>
+				<textElement>
+					<font fontName="Roboto" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{customerName}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="32" height="22" uuid="d8ac4725-d10b-44f9-8f18-4eabfd558b20">
+					<property name="net.sf.jasperreports.export.pdf.tag.th" value="full"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[Sr No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="15" width="153" height="22" uuid="8296b35c-80c4-45b2-b6d0-1871481ba870"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[Product Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="15" width="47" height="22" uuid="5081e734-eae8-4ea2-9842-f55878c966d3"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[HSN No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="15" width="40" height="22" uuid="c46995b2-ff2c-4263-8fde-493d5fb10963"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[GST(%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="15" width="31" height="22" uuid="f4f891da-6d94-45f0-94b3-4998a04cc138"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="15" width="55" height="22" uuid="d7e8ac26-dac8-4081-bbaf-62c350ec7562"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[CGST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="15" width="55" height="22" uuid="b7704814-6f97-430e-849a-16f6c7d7d27c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[SGST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="15" width="85" height="22" uuid="888792b6-d00f-49da-8bda-0d1e95600b27"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="15" width="57" height="22" uuid="a999a14f-7c73-4216-aaa5-d5505eeb100b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="360" y="0" width="55" height="35" uuid="5464e2ba-a1a7-4194-b288-dcf093dc6642"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cgstWithamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="0" width="153" height="35" uuid="c5594193-fdbe-4892-833a-ac908548bec1"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="47" height="35" uuid="48c904c0-ad2c-4e14-af19-f11c8db026c9"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hsnNumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement x="232" y="0" width="40" height="35" uuid="c3401a89-2c35-42ee-b992-8f8f434d71ff"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gst}+"%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="0" width="31" height="35" uuid="761828b6-6f4e-4e30-8f5d-47d2ebdc8b54"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="303" y="0" width="57" height="35" uuid="e11d7a3f-70fa-429c-9361-ec7ce74b2b63"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="0" width="55" height="35" uuid="ae7d27cd-ba08-404a-9125-6c9734dd6e17"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sgstWithamount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="470" y="0" width="85" height="35" uuid="132692ec-6810-4d63-8950-e310845bf03b"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="32" height="35" uuid="6596fe4d-042b-415e-9b10-a38f86af940a"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{srno}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="19" width="553" height="1" uuid="60632523-8e75-43e3-ad72-6910e9b1a79b"/>
+			</line>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>

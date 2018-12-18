@@ -44,6 +44,7 @@ public class ViewProductController implements Initializable {
     private void okClicked(ActionEvent e){
         Stage stage = (Stage) btnOk.getScene().getWindow();
         stage.close();
+        
     }
     
     

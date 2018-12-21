@@ -3,11 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/Main.java</file>
-            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/ViewProductController.java</file>
-            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/reports/invoice.jrxml</file>
-            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/model/InvoiceItem.java</file>
-            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/CustomersController.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/utility/NumberToWords.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/InvoiceController.java</file>
         </group>
     </open-files>

@@ -9,13 +9,17 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -51,6 +55,7 @@ import simpleinvoice.model.InvoiceItem;
 import simpleinvoice.model.Product;
 import simpleinvoice.repository.CustomerRepository;
 import simpleinvoice.repository.ProductRepository;
+import simpleinvoice.utility.NumberToWords;
 
 /**
  * FXML Controller class
@@ -351,9 +356,13 @@ public class InvoiceController implements Initializable {
         Map map = getInvoiceParameters();
         String reportPath = "/simpleinvoice/reports/invoice.jasper";
         JasperPrint print = null;
-       
+        List<InvoiceItem> list = FXCollections.observableArrayList(tblvInvoiceItems.getItems());
+        int size = list.size();
+        for (int i = 0; i < 7 - size; i++) {
+            list.add(new InvoiceItem(new Product("", 0, 0, 0), 0, 0, 0f, true));
+        }
         try(InputStream in = getClass().getResourceAsStream(reportPath)){
-            print = JasperFillManager.fillReport(in, map,new JRBeanCollectionDataSource(tblvInvoiceItems.getItems(),true));
+            print = JasperFillManager.fillReport(in, map,new JRBeanCollectionDataSource(list,true));
         } catch(Exception ex){
             System.out.println(ex);
             ex.printStackTrace();
@@ -373,6 +382,14 @@ public class InvoiceController implements Initializable {
         map.put("invoiceNo", tfInvoiceNo.getText().trim());
         map.put("invoiceDate", dpInvoiceDate.getValue().toString());
         map.put("partyGSTN", lblGST.getText().trim());
+        map.put("subTotal", tfSubTotal.getText());
+        map.put("discount", Float.parseFloat(tfDiscount.getText()));
+        map.put("netAmount",tfNetAmount.getText());
+        try {
+            map.put("amountInWords", NumberToWords.convertNumberToWords(new BigDecimal(formatter.parse(tfNetAmount.getText()).toString()), true, true));
+        } catch (ParseException ex) {
+            Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return map;
     }
 

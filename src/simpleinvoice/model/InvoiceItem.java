@@ -25,7 +25,6 @@ public class InvoiceItem {
     private final StringProperty sgstWithamount;
     private boolean isGSTIncluded = false;
     private final NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("en","IN"));
-
     public InvoiceItem(Product product,Integer srno,Integer quantity,Float price,boolean includesGST) {
         this.srno = new SimpleIntegerProperty(srno);
         this.productName = new SimpleStringProperty(product.getName());

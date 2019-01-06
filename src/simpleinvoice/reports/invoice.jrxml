@@ -110,7 +110,7 @@
 			<staticText>
 				<reportElement x="237" y="0" width="81" height="20" uuid="83811bcc-2406-469b-b966-bbe0ef2c2720"/>
 				<textElement>
-					<font fontName="Noto Sans" size="12" isBold="true" isItalic="true" isUnderline="true"/>
+					<font fontName="Roboto" size="12" isBold="true" isItalic="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[TAX INVOICE]]></text>
 			</staticText>
@@ -424,7 +424,7 @@
 				<textFieldExpression><![CDATA[$F{amount}==0?"":$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="32" height="35" uuid="6596fe4d-042b-415e-9b10-a38f86af940a"/>
+				<reportElement positionType="Float" x="0" y="0" width="32" height="35" uuid="6596fe4d-042b-415e-9b10-a38f86af940a"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>

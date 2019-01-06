@@ -27,9 +27,9 @@ public class CustomerRepository {
 
     private CustomerRepository() throws SQLException {
         initCustomersRepositary();
-        this.insertCustomer = Database.getConnection().prepareStatement("INSERT INTO simpleinvoice.customer VALUES (null,?,?,?,?)");
-        this.deleteCustomer = Database.getConnection().prepareStatement("DELETE FROM simpleinvoice.customer where cust_id = ?");
-        this.updateCustomer = Database.getConnection().prepareStatement("UPDATE simpleinvoice.customer SET cust_name = ? , cust_phone = ?, cust_address = ?,cust_gstn = ? where cust_id = ?");
+        this.insertCustomer = Database.getConnection().prepareStatement("INSERT INTO customer VALUES (null,?,?,?,?)");
+        this.deleteCustomer = Database.getConnection().prepareStatement("DELETE FROM customer where cust_id = ?");
+        this.updateCustomer = Database.getConnection().prepareStatement("UPDATE customer SET cust_name = ? , cust_phone = ?, cust_address = ?,cust_gstn = ? where cust_id = ?");
     }
 
     public static CustomerRepository getCustomerRepository() throws SQLException {
@@ -96,7 +96,7 @@ public class CustomerRepository {
 
     private void initCustomersRepositary() throws SQLException {
         Database.getInstance();
-        ResultSet rs = Database.executeQuery("select * from simpleinvoice.customer");
+        ResultSet rs = Database.executeQuery("select * from customer");
         while (rs.next()) {
             CUSTOMERS.add(new Customer(rs.getInt("cust_id"), rs.getString("cust_name"), rs.getString("cust_phone"), rs.getString("cust_address"), rs.getString("cust_gstn")));
             CUSTOMER_NAME_LIST.add(rs.getString("cust_name"));
@@ -104,7 +104,7 @@ public class CustomerRepository {
     }
 
     public int getCount() throws SQLException {
-        String sql = "select count(*) as count from simpleinvoice.customer";
+        String sql = "select count(*) as count from customer";
         ResultSet rs = Database.executeQuery(sql);
         rs.next();
         return rs.getInt("count");

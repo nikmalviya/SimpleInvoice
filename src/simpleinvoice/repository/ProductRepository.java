@@ -29,9 +29,9 @@ public class ProductRepository {
 
     private ProductRepository() throws SQLException {
         initProductsRepositary();
-        this.insertProduct = Database.getConnection().prepareStatement("INSERT INTO simpleinvoice.product (product_name,product_qty,product_gst,product_hsn) VALUES (?,?,?,?)");
-        this.deleteProduct = Database.getConnection().prepareStatement("DELETE FROM simpleinvoice.product where product_id = ?");
-        this.updateProduct = Database.getConnection().prepareStatement("UPDATE simpleinvoice.product SET product_name = ? , product_qty = ?, product_gst=?,product_hsn=? where product_id = ?");
+        this.insertProduct = Database.getConnection().prepareStatement("INSERT INTO product (product_name,product_qty,product_gst,product_hsn) VALUES (?,?,?,?)");
+        this.deleteProduct = Database.getConnection().prepareStatement("DELETE FROM product where product_id = ?");
+        this.updateProduct = Database.getConnection().prepareStatement("UPDATE product SET product_name = ? , product_qty = ?, product_gst=?,product_hsn=? where product_id = ?");
     }
 
     public static ProductRepository getProductRepository() throws SQLException {
@@ -73,7 +73,7 @@ public class ProductRepository {
     }
 
     public String getProductName(int id) throws SQLException {
-        ResultSet rs = Database.executeQuery("select product_name from simpleinvoice.product where product_id=" + id);
+        ResultSet rs = Database.executeQuery("select product_name from product where product_id=" + id);
         rs.next();
         return rs.getString("product_name");
     }
@@ -87,7 +87,7 @@ public class ProductRepository {
 //    }
 
     public int getProductId(String productName) throws SQLException {
-        String sql = "select product_id from simpleinvoice.product where product_name ='" + productName + "'";
+        String sql = "select product_id from product where product_name ='" + productName + "'";
         Database.getInstance();
         ResultSet rs = Database.executeQuery(sql);
         int id = 0;
@@ -106,7 +106,7 @@ public class ProductRepository {
 
     private void initProductsRepositary() throws SQLException {
         Database.getInstance();
-        ResultSet rs = Database.executeQuery("select * from simpleinvoice.product");
+        ResultSet rs = Database.executeQuery("select * from product");
         while (rs.next()) {
             PRODUCTS.add(new Product(rs.getInt("product_id"),rs.getString("product_name"),rs.getInt("product_qty"),rs.getFloat("product_gst"),rs.getInt("product_hsn")));
             PRODUCT_NAME_LIST.add(rs.getString("product_name"));
@@ -114,7 +114,7 @@ public class ProductRepository {
     }
 
     public int getCount() throws SQLException {
-        String sql = "select count(*) as count from simpleinvoice.product";
+        String sql = "select count(*) as count from product";
         ResultSet rs = Database.executeQuery(sql);
         rs.next();
         return rs.getInt("count");

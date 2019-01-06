@@ -8,9 +8,6 @@ public class Database {
     private static Connection con;
 
     private static Database instance;
-    private static final String HOST_NAME="localhost";
-    private static final String USER_NAME="root";
-    private static final String PASSWORD="";
     public static Connection getConnection() {
         return con;
     }
@@ -36,8 +33,9 @@ public class Database {
 
     public static void init() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://" + HOST_NAME + ":3306?useSSL=true&requireSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", USER_NAME, PASSWORD);
+            con = DriverManager.getConnection("jdbc:sqlite:simpleinvoice.db");
         } catch (SQLException ex) {
+            System.out.println(ex);
             Alert al = new Alert(Alert.AlertType.ERROR, ex.getMessage());
             al.setHeaderText(String.valueOf(ex.getErrorCode()));
             al.showAndWait();

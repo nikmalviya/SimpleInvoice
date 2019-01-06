@@ -90,7 +90,7 @@ public class ProductsController implements Initializable {
         try {
             productTableView.itemsProperty().set(ProductRepository.getProductRepository().getProducts());
         } catch (SQLException ex) {
-            System.out.println("Cannot link products with repository");
+            System.out.println("Cannot link products with repository"+ex);
         }
     }
 

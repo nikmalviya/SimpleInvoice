@@ -358,7 +358,7 @@ public class InvoiceController implements Initializable {
         JasperPrint print = null;
         List<InvoiceItem> list = FXCollections.observableArrayList(tblvInvoiceItems.getItems());
         int size = list.size();
-        for (int i = 0; i < 7 - size; i++) {
+        for (int i = 0; i < 6 - size; i++) {
             list.add(new InvoiceItem(new Product("", 0, 0, 0), 0, 0, 0f, true));
         }
         try(InputStream in = getClass().getResourceAsStream(reportPath)){

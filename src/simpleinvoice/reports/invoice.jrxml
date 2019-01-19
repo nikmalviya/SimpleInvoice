@@ -333,10 +333,10 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="35" splitType="Stretch">
+		<band height="30" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
 			<textField>
-				<reportElement x="360" y="0" width="55" height="35" uuid="5464e2ba-a1a7-4194-b288-dcf093dc6642"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="32" height="30" uuid="6596fe4d-042b-415e-9b10-a38f86af940a"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -344,10 +344,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Roboto"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{srno}==0?"":$F{cgstWithamount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{srno}==0?"":$F{srno}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="32" y="0" width="153" height="35" uuid="c5594193-fdbe-4892-833a-ac908548bec1"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="32" y="0" width="153" height="30" uuid="c5594193-fdbe-4892-833a-ac908548bec1"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -358,7 +358,7 @@
 				<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="47" height="35" uuid="48c904c0-ad2c-4e14-af19-f11c8db026c9"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="185" y="0" width="47" height="30" uuid="48c904c0-ad2c-4e14-af19-f11c8db026c9"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -369,7 +369,7 @@
 				<textFieldExpression><![CDATA[$F{hsnNumber}==0?"":$F{hsnNumber}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.0">
-				<reportElement x="232" y="0" width="40" height="35" uuid="c3401a89-2c35-42ee-b992-8f8f434d71ff"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="232" y="0" width="40" height="30" uuid="c3401a89-2c35-42ee-b992-8f8f434d71ff"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -380,7 +380,7 @@
 				<textFieldExpression><![CDATA[$F{gst}==0?"":$F{gst}+"%"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="272" y="0" width="31" height="35" uuid="761828b6-6f4e-4e30-8f5d-47d2ebdc8b54"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="272" y="0" width="31" height="30" uuid="761828b6-6f4e-4e30-8f5d-47d2ebdc8b54"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -391,7 +391,7 @@
 				<textFieldExpression><![CDATA[$F{quantity}==0?"":$F{quantity}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="303" y="0" width="57" height="35" uuid="e11d7a3f-70fa-429c-9361-ec7ce74b2b63"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="303" y="0" width="57" height="30" uuid="e11d7a3f-70fa-429c-9361-ec7ce74b2b63"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -402,7 +402,7 @@
 				<textFieldExpression><![CDATA[$F{rate}==0?"":$F{rate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="415" y="0" width="55" height="35" uuid="ae7d27cd-ba08-404a-9125-6c9734dd6e17"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="360" y="0" width="55" height="30" uuid="ae7d27cd-ba08-404a-9125-6c9734dd6e17"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -412,8 +412,19 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{srno}==0?"":$F{sgstWithamount}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="415" y="0" width="55" height="30" uuid="5464e2ba-a1a7-4194-b288-dcf093dc6642"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{srno}==0?"":$F{cgstWithamount}]]></textFieldExpression>
+			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="470" y="0" width="85" height="35" uuid="132692ec-6810-4d63-8950-e310845bf03b"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="470" y="0" width="85" height="30" uuid="132692ec-6810-4d63-8950-e310845bf03b"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -423,21 +434,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}==0?"":$F{amount}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement positionType="Float" x="0" y="0" width="32" height="35" uuid="6596fe4d-042b-415e-9b10-a38f86af940a"/>
-				<box>
-					<leftPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Roboto"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{srno}==0?"":$F{srno}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="16" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="0" width="555" height="1" uuid="81e510c9-fee4-4535-9608-cfc9a5e3e493"/>
 			</line>

@@ -11,9 +11,11 @@
             <file>file:/home/programmer/SimpleInvoice/test/Temp.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/database/Database.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/InvoiceController.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/AddCustomerController.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/model/Product.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/repository/ProductRepository.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/model/Customer.java</file>
+            <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/repository/InvoiceRepository.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/DashBoardController.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/repository/CustomerRepository.java</file>
             <file>file:/home/programmer/SimpleInvoice/src/simpleinvoice/controller/ProductsController.java</file>

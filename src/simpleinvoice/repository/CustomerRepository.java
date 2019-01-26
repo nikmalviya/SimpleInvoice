@@ -76,16 +76,16 @@ public class CustomerRepository {
 //        return rs.getString("product_name");
 //    }
 
-//    public int getCustomerId(String productName) throws SQLException {
-//        String sql = "select product_id from simpleinvoice.product where product_name ='" + productName + "'";
-//        Database.getInstance();
-//        ResultSet rs = Database.executeQuery(sql);
-//        int id = 0;
-//        while (rs.next()) {
-//            id = rs.getInt("product_id");
-//        }
-//        return id;
-//    }
+    public int getCustomerId(String customer_name) throws SQLException {
+        String sql = "select cust_id from customer where cust_name ='" + customer_name + "'";
+        Database.getInstance();
+        ResultSet rs = Database.executeQuery(sql);
+        int id = 0;
+        while (rs.next()) {
+            id = rs.getInt("cust_id");
+        }
+        return id;
+    }
 
     public void deleteCustomer(Customer c) throws SQLException {
         deleteCustomer.setInt(1, c.getCustomerID());

@@ -36,6 +36,12 @@ public class Invoice {
     public Invoice(int invoice_no,LocalDate date,Customer customer,float net_amount,float discount,ObservableList<InvoiceItem> items){
         this(0,invoice_no,date,customer,net_amount,discount,items);
     }
+    public ObservableList<InvoiceItem> getItems(){
+        return this.items.get();
+    }
+    public void setItems(ObservableList<InvoiceItem> list){
+        this.items = new SimpleListProperty<>(items);
+    }
     public float getSubtotal(){
         return subtotal.floatValue();
     }   

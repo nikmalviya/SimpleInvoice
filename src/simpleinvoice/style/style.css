@@ -237,3 +237,8 @@ AnchorPane{
 .text:focused:hover{
      -fx-fill: white;
 }
+#tfInvoiceNo{
+    -fx-font-size: 18px; 
+    -fx-font-weight:700;
+    -fx-font-posture:italic;
+}

@@ -51,9 +51,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import simpleinvoice.model.Customer;
+import simpleinvoice.model.Invoice;
 import simpleinvoice.model.InvoiceItem;
 import simpleinvoice.model.Product;
 import simpleinvoice.repository.CustomerRepository;
+import simpleinvoice.repository.InvoiceRepository;
 import simpleinvoice.repository.ProductRepository;
 import simpleinvoice.utility.NumberToWords;
 
@@ -162,6 +164,7 @@ public class InvoiceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         btnSave.setOnAction(this::previewInvoice);
         tblvInvoiceItems.setPlaceholder(new Label("No Products Added.."));
         LocalDate date = LocalDate.now();
@@ -195,6 +198,11 @@ public class InvoiceController implements Initializable {
         tfNetAmount.setText("Rs. 0");
         tfQty.setOnKeyReleased(e -> calculateAmount());
         tfRate.setOnKeyReleased(e -> calculateAmount());
+        try {
+            tfInvoiceNo.setText(String.valueOf(InvoiceRepository.getInvoiceRepository().getInvoiceCount()+1));
+        } catch (SQLException ex) {
+            Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void subtractDiscount(KeyEvent e) {
@@ -294,7 +302,8 @@ public class InvoiceController implements Initializable {
             lblContact.setText(selectedCustomer.getContactNumber());
             lblAddress.setText(selectedCustomer.getAddress());
             lblGST.setText(selectedCustomer.getPartyGSTNo());
-            mbCustomer.hide();            
+            mbCustomer.hide();   
+            
         }
     }
 
@@ -353,6 +362,7 @@ public class InvoiceController implements Initializable {
         srnoCounter--;
     }
     private void previewInvoice(ActionEvent e){
+        saveInvoiceData();
         Map map = getInvoiceParameters();
         String reportPath = "/simpleinvoice/reports/invoice.jasper";
         JasperPrint print = null;
@@ -391,6 +401,23 @@ public class InvoiceController implements Initializable {
             Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return map;
+    }
+    public void saveInvoiceData(){
+        int invoiceno = Integer.parseInt(tfInvoiceNo.getText());
+        LocalDate date = dpInvoiceDate.getValue();
+        Float netAmount = 0f;
+        try {
+             netAmount = formatter.parse(tfNetAmount.getText()).floatValue();
+        } catch (ParseException ex) {
+            Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Float discount = Float.parseFloat(tfDiscount.getText());
+        Invoice invoice = new Invoice(invoiceno, date, selectedCustomer,netAmount , discount, tblvInvoiceItems.getItems());
+        try {
+            InvoiceRepository.getInvoiceRepository().addNewInvoice(invoice);
+        } catch (SQLException ex) {
+            Logger.getLogger(InvoiceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

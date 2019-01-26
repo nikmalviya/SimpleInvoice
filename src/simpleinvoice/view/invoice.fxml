@@ -42,7 +42,10 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfInvoiceNo" layoutX="136.0" prefHeight="31.0" prefWidth="144.0" />
+                        <TextField fx:id="tfInvoiceNo" layoutX="136.0" prefHeight="31.0" prefWidth="144.0">
+                           <font>
+                              <Font name="System Bold Italic" size="16.0" />
+                           </font></TextField>
                         <Label fx:id="lblGST" layoutX="136.0" layoutY="91.0" style="-fx-font-weight: normal;" styleClass="result" />
                         <Label layoutX="1.0" layoutY="47.0" text="Invoice Date:">
                            <font>
